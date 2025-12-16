@@ -1,0 +1,50 @@
+🗓️ 30-Day Linux Learning Plan
+Week 1 — Core Basics
+
+Day 1: Install Linux in a VM
+Day 2: Terminal navigation (ls, cd, pwd, tree)
+Day 3: File ops (cp, mv, rm, cat, nano)
+Day 4: Permissions (chmod, chown, umask)
+Day 5: Processes (ps, top, htop, kill)
+Day 6: Archives (tar, zip, unzip)
+Day 7: Review + small challenge (manage files in a folder structure)
+
+Week 2 — System & Package Management
+
+Day 8: Learn your package manager (apt or dnf)
+Day 9: Updates, repos, installing apps
+Day 10: Systemd basics (systemctl start/stop/status)
+Day 11: Logging (journalctl, /var/log/)
+Day 12: Users & groups
+Day 13: Cron jobs & automation
+Day 14: Review + challenge (create user, schedule a cron job)
+
+Week 3 — Networking & Services
+
+Day 15: IP, DNS, routing (ip a, ip r, ping)
+Day 16: Ports & connections (ss -tulnp, netstat)
+Day 17: Firewalls (ufw or firewalld)
+Day 18: Install and configure Nginx
+Day 19: Host a simple webpage
+Day 20: Create a custom systemd service
+Day 21: Review + challenge (deploy a small site)
+
+Week 4 — Scripting & Docker
+
+Day 22: Bash scripting basics
+Day 23: Variables, loops, conditionals
+Day 24: Build a simple script to automate something
+Day 25: Install Docker
+Day 26: Images vs containers, run your first container
+Day 27: Build a Dockerfile
+Day 28: Volumes + networking
+Day 29: Docker Compose (optional)
+Day 30: Final project (run a web app inside Docker)
+
+If you want, I can also make:
+
+A checklist you can tick off daily
+
+A more advanced 60-day plan
+
+A resource pack (videos, docs, practice tasks)

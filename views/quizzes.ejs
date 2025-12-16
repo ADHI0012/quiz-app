@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="text-center my-4 text-uppercase fw-bold">Select a Quiz to Begin</h1>
+<hr />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <% for (let quiz of quizzes) { %>
+
+    <div
+      class="card bg-dark text-white shadow m-3 border-0"
+      style="width: 25rem"
+    >
+      <div class="card-body p-4">
+        <h5 class="card-title text-uppercase fw-bold"><%= quiz.title %></h5>
+        <h6 class="card-subtitle mb-2 text-uppercase text-secondary">
+          (<%= quiz.type %>)
+        </h6>
+        <p class="card-text small"><%= quiz.description %></p>
+
+        <a href="/quiz/<%= quiz._id %>" class="card-link">Attend Quiz</a>
+        <a href="#" class="card-link">Leaderboard</a>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

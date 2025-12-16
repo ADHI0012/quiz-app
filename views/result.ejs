@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="d-flex flex-column justify-content-center align-items-center p-3">
+  <h1 class="display-4 fw-bold">Your Results</h1>
+  <h2 class="display-5">
+    <%= Math.round(score * 100 / Object.keys(resultObject).length) %>%
+  </h2>
+  <hr />
+  <% for (let q in rightOrWrongObject) { %> <% if (rightOrWrongObject[q] == 1) {
+  %>
+  <div class="card bg-success mb-3" style="width: 55rem">
+    <div class="card-body">
+      <h5 class="card-title"><%= questions[q] %></h5>
+      <p class="card-text">Correct Answer: <%= resultObject[q] %></p>
+      <p class="card-text">Your Answer: <%= userAnswers[q] %></p>
+    </div>
+  </div>
+  <% } else {%>
+  <div class="card bg-danger mb-3" style="width: 55rem">
+    <div class="card-body">
+      <h5 class="card-title"><%= questions[q] %></h5>
+      <p class="card-text">Correct Answer: <%= resultObject[q] %></p>
+      <p class="card-text">Your Answer: <%= userAnswers[q] %></p>
+    </div>
+  </div>
+  <% } %> <% } %>
+</div>

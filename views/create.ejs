@@ -1,0 +1,50 @@
+<% layout("layouts/boilerplate") %>
+
+<h1 class="display-1">Create Your Quiz</h1>
+<hr />
+<form action="/create" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label fs-4">Quiz Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Quiz Title"
+      name="title"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="type" class="form-label fs-4">Quiz Type</label>
+
+    <select class="form-select" aria-label="Default select example" name="type">
+      <option value="">Select Quiz Type</option>
+      <option value="mcq" selected>Multiple Choice Questions</option>
+      <option value="trueorfalse">True or False</option>
+      <option value="text">Text</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="questions" class="form-label fs-4">Number of Questions</label>
+    <input
+      type="number"
+      class="form-control"
+      id="questions"
+      placeholder="No.of Questions"
+      name="qns"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="description fs-4" class="form-label fs-4">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      placeholder="Quiz Description"
+      name="description"
+    ></textarea>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-success p-2">Create Quiz</button>
+  </div>
+</form>
