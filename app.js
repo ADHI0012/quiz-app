@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Question = require("./models/science");
+const Question = require("./models/question");
 const Quiz = require("./models/quiz");
 const ejsMate = require("ejs-mate");
 
@@ -23,36 +23,6 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-// app.post("/quiz/result", async (req, res) => {
-//   const resultObject = {};
-//   const userAnswers = req.body;
-//   console.log(userAnswers);
-//   const rightOrWrongObject = {};
-//   let i = 1;
-//   let score = 0;
-//   const questions = await Question.find({});
-//   for (let q of questions) {
-//     resultObject[`question-${i}`] = q.correctAnswer;
-//     i++;
-//   }
-//   for (let q in resultObject) {
-//     if (resultObject[q] === userAnswers[q]) {
-//       score++;
-//       rightOrWrongObject[q] = 1;
-//     } else {
-//       rightOrWrongObject[q] = 0;
-//     }
-//   }
-
-//   res.render("result", {
-//     userAnswers,
-//     resultObject,
-//     rightOrWrongObject,
-//     questions,
-//     score,
-//   });
-// });
-
 app.get("/quizzes", async (req, res) => {
   const quizzes = await Quiz.find({});
   res.render("quizzes", { quizzes });
@@ -62,7 +32,7 @@ app.post("/question", async (req, res) => {
   const title = req.query.title;
   const { question, option1, option2, option3, option4, correctOption } =
     req.body;
-  console.log(title);
+
   const reqQuiz = await Quiz.findOne({ title });
   const data = {
     question,
@@ -75,7 +45,9 @@ app.post("/question", async (req, res) => {
       answer: req.body[`${correctOption}`],
     },
   };
-  reqQuiz.questions.push(data);
+  const q = new Question(data);
+  await q.save();
+  reqQuiz.questions.push(q._id);
   await reqQuiz.save();
 });
 
@@ -92,7 +64,7 @@ app.post("/create", async (req, res) => {
 
 app.get("/quiz/:id", async (req, res) => {
   const { id } = req.params;
-  const reqQuiz = await Quiz.findById(id);
+  const reqQuiz = await Quiz.findById(id).populate("questions");
   if (!reqQuiz) {
     res.send("No such quiz !!");
     return;
@@ -105,7 +77,7 @@ app.post("/quiz/:id", async (req, res) => {
   const resultObject = {};
   const rightOrWrongObject = {};
   const questions = {};
-  const quiz = await Quiz.findById(id);
+  const quiz = await Quiz.findById(id).populate("questions");
   let i = 1,
     score = 0;
   for (let q of quiz.questions) {

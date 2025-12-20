@@ -6,19 +6,7 @@ const quizSchema = new Schema({
   qns: Number,
   type: String,
   description: String,
-  questions: [
-    {
-      question: String,
-      option1: String,
-      option2: String,
-      option3: String,
-      option4: String,
-      correctAnswer: {
-        option: String,
-        answer: String,
-      },
-    },
-  ],
+  questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);

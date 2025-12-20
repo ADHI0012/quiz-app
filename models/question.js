@@ -7,7 +7,10 @@ const questionSchema = new Schema({
   option2: String,
   option3: String,
   option4: String,
-  correctAnswer: String,
+  correctAnswer: {
+    option: String,
+    answer: String,
+  },
 });
 
 const Question = mongoose.model("Question", questionSchema);
