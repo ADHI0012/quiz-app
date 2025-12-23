@@ -3,7 +3,7 @@ let paddedMin = document.querySelector("#minutes");
 let paddedHour = document.querySelector("#hours");
 let container = document.querySelector(".content");
 const quizForm = document.querySelector("#quizForm");
-let duration = 30000;
+let duration = 600000;
 
 let remSec, remMin, remHour;
 
