@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Question = require("./models/science");
+const Quiz = require("./models/quiz");
+const Question = require("./models/question");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/quiz-app")
@@ -10,173 +11,156 @@ mongoose
     console.log("MONGO CONNECTION ERROR");
   });
 
-const questions = [
+const quizzes = [
   {
-    question: "What is the capital of Australia?",
-    option1: "Sydney",
-    option2: "Melbourne",
-    option3: "Canberra",
-    option4: "Perth",
-    correctAnswer: "Canberra",
-  },
-  {
-    question: "Which planet is known as the Red Planet?",
-    option1: "Venus",
-    option2: "Mars",
-    option3: "Jupiter",
-    option4: "Saturn",
-    correctAnswer: "Mars",
-  },
-  {
-    question: "Who wrote 'Hamlet'?",
-    option1: "Charles Dickens",
-    option2: "William Shakespeare",
-    option3: "Mark Twain",
-    option4: "Oscar Wilde",
-    correctAnswer: "William Shakespeare",
-  },
-  {
-    question: "Which continent is the largest by area?",
-    option1: "Africa",
-    option2: "Asia",
-    option3: "Europe",
-    option4: "South America",
-    correctAnswer: "Asia",
-  },
-  {
-    question: "What is the currency of Japan?",
-    option1: "Yen",
-    option2: "Won",
-    option3: "Yuan",
-    option4: "Ringgit",
-    correctAnswer: "Yen",
-  },
-  {
-    question: "Which ocean is the deepest?",
-    option1: "Atlantic",
-    option2: "Indian",
-    option3: "Arctic",
-    option4: "Pacific",
-    correctAnswer: "Pacific",
-  },
-  {
-    question: "How many bones does an adult human have?",
-    option1: "206",
-    option2: "190",
-    option3: "219",
-    option4: "240",
-    correctAnswer: "206",
-  },
-  {
-    question: "Which country invented paper?",
-    option1: "Egypt",
-    option2: "China",
-    option3: "Greece",
-    option4: "India",
-    correctAnswer: "China",
-  },
-  {
-    question: "The Great Barrier Reef is located in:",
-    option1: "Australia",
-    option2: "Canada",
-    option3: "South Africa",
-    option4: "Brazil",
-    correctAnswer: "Australia",
-  },
-  {
-    question: "What is the fastest land animal?",
-    option1: "Lion",
-    option2: "Cheetah",
-    option3: "Leopard",
-    option4: "Tiger",
-    correctAnswer: "Cheetah",
+    title: "Web Basics Quiz",
+    qns: 3,
+    type: "Web Development",
+    description: "HTML, CSS, and JavaScript fundamentals",
+    difficulty: "Easy",
+    questions: [
+      {
+        question: "What does HTML stand for?",
+        option1: "HyperText Markup Language",
+        option2: "HighText Machine Language",
+        option3: "HyperTransfer Markup Language",
+        option4: "Home Tool Markup Language",
+        correctAnswer: {
+          option: "option1",
+          answer: "HyperText Markup Language",
+        },
+      },
+      {
+        question: "Which tag is used for a line break in HTML?",
+        option1: "<lb>",
+        option2: "<break>",
+        option3: "<br>",
+        option4: "<line>",
+        correctAnswer: {
+          option: "option3",
+          answer: "<br>",
+        },
+      },
+      {
+        question: "Which keyword declares a constant in JavaScript?",
+        option1: "var",
+        option2: "let",
+        option3: "const",
+        option4: "static",
+        correctAnswer: {
+          option: "option3",
+          answer: "const",
+        },
+      },
+    ],
   },
 
-  // Sports
   {
-    question: "How many players are on a basketball team on the court?",
-    option1: "6",
-    option2: "4",
-    option3: "5",
-    option4: "7",
-    correctAnswer: "5",
-  },
-  {
-    question: "Who has won the most FIFA World Cups?",
-    option1: "Germany",
-    option2: "Argentina",
-    option3: "Italy",
-    option4: "Brazil",
-    correctAnswer: "Brazil",
-  },
-  {
-    question: "In tennis, what is a score of 40–40 called?",
-    option1: "Tie",
-    option2: "Deuce",
-    option3: "Match point",
-    option4: "Break",
-    correctAnswer: "Deuce",
-  },
-  {
-    question: "Which sport uses a shuttlecock?",
-    option1: "Tennis",
-    option2: "Squash",
-    option3: "Badminton",
-    option4: "Table Tennis",
-    correctAnswer: "Badminton",
-  },
-  {
-    question: "Where were the 2016 Summer Olympics held?",
-    option1: "Tokyo",
-    option2: "Rio de Janeiro",
-    option3: "London",
-    option4: "Beijing",
-    correctAnswer: "Rio de Janeiro",
+    title: "Computer Science Basics",
+    qns: 3,
+    type: "CS Fundamentals",
+    description: "Core CS concepts",
+    difficulty: "Easy",
+    questions: [
+      {
+        question: "Which data structure follows FIFO?",
+        option1: "Stack",
+        option2: "Queue",
+        option3: "Tree",
+        option4: "Graph",
+        correctAnswer: {
+          option: "option2",
+          answer: "Queue",
+        },
+      },
+      {
+        question: "Which data structure follows LIFO?",
+        option1: "Queue",
+        option2: "Heap",
+        option3: "Stack",
+        option4: "Graph",
+        correctAnswer: {
+          option: "option3",
+          answer: "Stack",
+        },
+      },
+      {
+        question: "Binary number system uses base?",
+        option1: "2",
+        option2: "8",
+        option3: "10",
+        option4: "16",
+        correctAnswer: {
+          option: "option1",
+          answer: "2",
+        },
+      },
+    ],
   },
 
-  // Science & Tech
   {
-    question: "What is the chemical symbol for Gold?",
-    option1: "Ag",
-    option2: "Au",
-    option3: "Gd",
-    option4: "Go",
-    correctAnswer: "Au",
-  },
-  {
-    question: "Which gas do plants absorb during photosynthesis?",
-    option1: "Oxygen",
-    option2: "Carbon monoxide",
-    option3: "Carbon dioxide",
-    option4: "Nitrogen",
-    correctAnswer: "Carbon dioxide",
-  },
-  {
-    question: "What does 'CPU' stand for?",
-    option1: "Central Process Unit",
-    option2: "Computer Power Unit",
-    option3: "Control Processing Unit",
-    option4: "Central Processing Unit",
-    correctAnswer: "Central Processing Unit",
-  },
-  {
-    question: "What is the approximate speed of light?",
-    option1: "300 km/s",
-    option2: "30,000 km/s",
-    option3: "300,000 km/s",
-    option4: "3,000,000 km/s",
-    correctAnswer: "300,000 km/s",
-  },
-  {
-    question: "Which company developed the Android operating system?",
-    option1: "Apple",
-    option2: "Google",
-    option3: "Microsoft",
-    option4: "IBM",
-    correctAnswer: "Google",
+    title: "Networking Basics",
+    qns: 3,
+    type: "Computer Networks",
+    description: "Basic networking knowledge",
+    difficulty: "Easy",
+    questions: [
+      {
+        question: "What does IP stand for?",
+        option1: "Internet Program",
+        option2: "Internet Protocol",
+        option3: "Internal Process",
+        option4: "Interface Program",
+        correctAnswer: {
+          option: "option2",
+          answer: "Internet Protocol",
+        },
+      },
+      {
+        question: "Which device routes data between networks?",
+        option1: "Switch",
+        option2: "Hub",
+        option3: "Router",
+        option4: "Repeater",
+        correctAnswer: {
+          option: "option3",
+          answer: "Router",
+        },
+      },
+      {
+        question: "Which protocol is used to transfer web pages?",
+        option1: "FTP",
+        option2: "SMTP",
+        option3: "HTTP",
+        option4: "SNMP",
+        correctAnswer: {
+          option: "option3",
+          answer: "HTTP",
+        },
+      },
+    ],
   },
 ];
+const insertQuizzes = async () => {
+  const questionIds = [];
+  for (let quiz of quizzes) {
+    for (let question of quiz.questions) {
+      const q = await Question.create(question);
+      questionIds.push(q._id);
+    }
 
-Question.insertMany(questions).then(() => {
-  console.log("Inserted Data !");
-});
+    await Quiz.create({
+      title: quiz.title,
+      type: quiz.type,
+      description: quiz.description,
+      difficulty: quiz.difficulty,
+      questions: questionIds,
+    });
+  }
+};
+
+insertQuizzes()
+  .then(() => {
+    console.log("INSERTED DATA !");
+  })
+  .catch((err) => console.log(err));

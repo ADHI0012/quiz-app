@@ -5,8 +5,15 @@ const quizSchema = new Schema({
   title: String,
   qns: Number,
   type: String,
-  description: String,
+  description: {
+    type: String,
+    // required: true,
+  },
   questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+  difficulty: {
+    type: String,
+    // required: true,
+  },
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);

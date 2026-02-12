@@ -3,6 +3,22 @@
 <hr />
 
 <div class="container">
+  <div class="sort w-50">
+    <form action="/quizzes">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        name="query"
+        id="filter"
+      >
+        <option value="All">All</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+      <button class="btn btn-sm btn-success">Filter</button>
+    </form>
+  </div>
   <div class="row justify-content-center">
     <% for (let quiz of quizzes) { %>
 
@@ -24,3 +40,7 @@
     <% } %>
   </div>
 </div>
+<script>
+  const selected = "<%= selected %>";
+</script>
+<script src="/selectFilterValue.js"></script>

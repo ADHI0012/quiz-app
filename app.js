@@ -24,8 +24,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/quizzes", async (req, res) => {
-  const quizzes = await Quiz.find({});
-  res.render("quizzes", { quizzes });
+  const { query } = req.query;
+  const selected = query ? query : "All";
+  let quizzes = await Quiz.find({});
+  if (query && query !== "All") {
+    quizzes = quizzes.filter((quiz) => {
+      if (quiz.difficulty === query) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  res.render("quizzes", { quizzes, selected });
 });
 
 app.post("/question", async (req, res) => {
@@ -56,8 +67,9 @@ app.get("/create", (req, res) => {
 });
 
 app.post("/create", async (req, res) => {
-  const { type, qns, title, description } = req.body;
-  const newQuiz = new Quiz({ title, qns, type, description });
+  console.log(req.body);
+  const { type, qns, title, description, difficulty } = req.body;
+  const newQuiz = new Quiz({ title, qns, type, description, difficulty });
   await newQuiz.save();
   res.render("page", { qns, title, type });
 });
